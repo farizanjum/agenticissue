@@ -1,0 +1,3776 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "ZeroEntropy API",
+        "description": "This API provides access to ZeroEntropy's SoTA retrieval pipeline. Enjoy!",
+        "version": "0.1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.zeroentropy.dev/v1",
+            "description": "ZeroEntropy API"
+        },
+        {
+            "url": "https://eu-api.zeroentropy.dev/v1",
+            "description": "ZeroEntropy API (EU datacenters)"
+        }
+    ],
+    "paths": {
+        "/admin/create-organization": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Create Organization",
+                "description": "Creates an organization with the provided organization name.\n\nReturns 201 if a new organization was created, 200 if an existing organization was found.",
+                "operationId": "create_organization_admin_create_organization_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateOrganizationRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DefaultResponse"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "x-hidden": true
+            }
+        },
+        "/admin/add-api-key": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Add Api Key",
+                "description": "Creates a new API key for the specified organization.",
+                "operationId": "add_api_key_admin_add_api_key_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AddAPIKeyRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AddAPIKeyResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "x-hidden": true
+            }
+        },
+        "/admin/list-api-keys": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "List Api Keys",
+                "description": "Lists all API keys for the specified organization.",
+                "operationId": "list_api_keys_admin_list_api_keys_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ListAPIKeysRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListAPIKeysResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "x-hidden": true
+            }
+        },
+        "/admin/delete-api-key": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Delete Api Key",
+                "description": "Deletes the specified API key.",
+                "operationId": "delete_api_key_admin_delete_api_key_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeleteAPIKeyRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DefaultResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "x-hidden": true
+            }
+        },
+        "/admin/update-api-key": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Update Api Key",
+                "description": "Updates the name and/or permission of the specified API key.",
+                "operationId": "update_api_key_admin_update_api_key_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateAPIKeyRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DefaultResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "x-hidden": true
+            }
+        },
+        "/usage/documents": {
+            "post": {
+                "tags": [
+                    "Usage"
+                ],
+                "summary": "Get Document Usage",
+                "description": "Document usage analytics (added/deleted/parsed/indexed events).",
+                "operationId": "get_document_usage_usage_documents_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UsageRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/DocumentUsageResponse"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Get Document Usage Usage Documents Post"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "x-hidden": true
+            }
+        },
+        "/usage/queries": {
+            "post": {
+                "tags": [
+                    "Usage"
+                ],
+                "summary": "Get Query Usage",
+                "description": "Query usage (fine/coarse/pages/documents queries).",
+                "operationId": "get_query_usage_usage_queries_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UsageRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/QueryUsageResponse"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Get Query Usage Usage Queries Post"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "x-hidden": true
+            }
+        },
+        "/usage/models/reranker": {
+            "post": {
+                "tags": [
+                    "Usage"
+                ],
+                "summary": "Get Models Reranker Usage",
+                "description": "Get reranker usage analytics with model breakdown.\n\nNote: Rerank events don't have collection_id, so collection filtering is not supported.\nIf collection_names are provided in the request, they will be ignored.",
+                "operationId": "get_models_reranker_usage_usage_models_reranker_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UsageRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/RerankUsageResponse"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Get Models Reranker Usage Usage Models Reranker Post"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "x-hidden": true
+            }
+        },
+        "/usage/models/counters": {
+            "post": {
+                "tags": [
+                    "Usage"
+                ],
+                "summary": "Get Models Usage Counters",
+                "description": "Get models usage counters for all-time and current billing cycle.",
+                "operationId": "get_models_usage_counters_usage_models_counters_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ModelsUsageCountersResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "x-hidden": true
+            }
+        },
+        "/usage/counters": {
+            "post": {
+                "tags": [
+                    "Usage"
+                ],
+                "summary": "Get Usage Counters",
+                "description": "Usage counters for all-time and current billing cycle.",
+                "operationId": "get_usage_counters_usage_counters_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UsageCountersResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "x-hidden": true
+            }
+        },
+        "/models/rerank": {
+            "post": {
+                "tags": [
+                    "Models"
+                ],
+                "summary": "Rerank",
+                "description": "Reranks the provided documents, according to the provided query.\n\nThe results will be sorted by descending order of relevance. For each document, the index and the score will be returned. The index is relative to the documents array that was passed in. The score is the query-document relevancy determined by the reranker model. The results will be returned in descending order of relevance.\n\nOrganizations will, by default, have a ratelimit of `2,500,000` bytes-per-minute and 1000 QPM. Ratelimits are refreshed every 15 seconds. If this is exceeded, requests will be throttled into `latency: \"slow\"` mode, up to `20,000,000` bytes-per-minute. If even this is exceeded, you will get a `429` error. To request higher ratelimits, please contact [founders@zeroentropy.dev](mailto:founders@zeroentropy.dev) or message us on [Discord](https://go.zeroentropy.dev/discord) or [Slack](https://go.zeroentropy.dev/slack)!",
+                "operationId": "rerank_models_rerank_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RerankRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RerankResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/models/embed": {
+            "post": {
+                "tags": [
+                    "Models"
+                ],
+                "summary": "Embed",
+                "description": "Embeds the provided input text with ZeroEntropy embedding models.\n\nThe results will be returned in the same order as the text provided. The embedding is such that queries will have high cosine similarity with documents that are relevant to that query.\n\nOrganizations will, by default, have a ratelimit of `2,500,000` bytes-per-minute and 1000 QPM. Ratelimits are refreshed every 15 seconds. If this is exceeded, requests will be throttled into `latency: \"slow\"` mode, up to `20,000,000` bytes-per-minute. If even this is exceeded, you will get a `429` error. To request higher ratelimits, please contact [founders@zeroentropy.dev](mailto:founders@zeroentropy.dev) or message us on [Discord](https://go.zeroentropy.dev/discord) or [Slack](https://go.zeroentropy.dev/slack)!",
+                "operationId": "embed_models_embed_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EmbedRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EmbedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/status/get-status": {
+            "post": {
+                "tags": [
+                    "Status"
+                ],
+                "summary": "Get Status",
+                "description": "Gets the current indexing status across all documents.\n\nIf a collection name is passed in, it will get the indexing status of only the documents within that collection. Otherwise, it will show the cumulative status across all of your collections.\n\nA `404 Not Found` status code will be returned, if a collection name was provided, but it does not exist.",
+                "operationId": "get_status_status_get_status_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StatusRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StatusResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/collections/add-collection": {
+            "post": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Add Collection",
+                "description": "Adds a collection.\n\nIf the collection already exists, a `409 Conflict` status code will be returned.",
+                "operationId": "add_collection_collections_add_collection_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AddCollectionRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DefaultResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/collections/get-collection-list": {
+            "post": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Get Collection List",
+                "description": "Gets a complete list of all of your collections.",
+                "operationId": "get_collection_list_collections_get_collection_list_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/EmptyRequest"
+                                    }
+                                ],
+                                "title": "Request",
+                                "default": {}
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetCollectionListResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/collections/delete-collection": {
+            "post": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Delete Collection",
+                "description": "Deletes a collection.\n\nA `404 Not Found` status code will be returned, if the provided collection name does not exist.",
+                "operationId": "delete_collection_collections_delete_collection_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeleteCollectionRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DefaultResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/documents/add-document": {
+            "post": {
+                "tags": [
+                    "Documents"
+                ],
+                "summary": "Add Document",
+                "description": "Adds a document to a given collection.\n\nA status code of `201 Created` will be returned if a document was successfully added. A status code of `409 Conflict` will be returned if the given collection already has a document with the same path.\n\nIf `overwrite` is given a value of `true`, then a status code of `200 OK` will be returned if a document was overwritten (Rather than a status code of `409 Conflict`).\n\nWhen a document is inserted, it can take time to appear in the index. Check the `/status/get-status` endpoint to see progress.",
+                "operationId": "add_document_documents_add_document_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AddDocumentRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DefaultResponse"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/documents/update-document": {
+            "post": {
+                "tags": [
+                    "Documents"
+                ],
+                "summary": "Update Document",
+                "description": "Updates a document. This endpoint is atomic.\n\nCurrently both `metadata` and `index_status` are supported.\n\n- When updating with a non-null `metadata`, the document must have `index_status` of `indexed`. After this call, the document will have an `index_status` of `not_indexed`, since the document will need to reindex with the new metadata.\n- When updating with a non-null `index_status`, setting it to `not_parsed` or `not_indexed` requires that the document must have `index_status` of `parsing_failed` or `indexing_failed`, respectively.\n\nA `404 Not Found` status code will be returned, if the provided collection name or document path does not exist.",
+                "operationId": "update_document_documents_update_document_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateDocumentRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DefaultResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/documents/get-document-info": {
+            "post": {
+                "tags": [
+                    "Documents"
+                ],
+                "summary": "Get Document Info",
+                "description": "Retrieves information about a specific document. The request parameters define what information you would like to receive.\n\nA `404 Not Found` will be returned if either the collection name does not exist, or the document path does not exist within the provided collection.",
+                "operationId": "get_document_info_documents_get_document_info_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GetDocumentInfoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetDocumentInfoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/documents/get-document-info-list": {
+            "post": {
+                "tags": [
+                    "Documents"
+                ],
+                "summary": "Get Document Info List",
+                "description": "Retrives a list of document metadata information that matches the provided filters.\n\nThe documents returned will be sorted by path in lexicographically ascending order. `path_gt` can be used for pagination, and should be set to the path of the last document returned in the previous call.\n\nA `404 Not Found` will be returned if either the collection name does not exist, or the document path does not exist within the provided collection.",
+                "operationId": "get_document_info_list_documents_get_document_info_list_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GetDocumentInfoListRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetDocumentInfoListResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/documents/delete-document": {
+            "post": {
+                "tags": [
+                    "Documents"
+                ],
+                "summary": "Delete Document",
+                "description": "Deletes a document\n\nA `404 Not Found` status code will be returned, if the provided collection name or document path does not exist.",
+                "operationId": "delete_document_documents_delete_document_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeleteDocumentRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeleteDocumentResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/documents/get-page-info": {
+            "post": {
+                "tags": [
+                    "Documents"
+                ],
+                "summary": "Get Page Info",
+                "description": "Retrieves information about a specific page. The request parameters define what information you would like to receive.\n\nA `404 Not Found` will be returned if either the collection name does not exist, or the document path does not exist within the provided collection.",
+                "operationId": "get_page_info_documents_get_page_info_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GetPageInfoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPageInfoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/documents/get-document": {
+            "get": {
+                "tags": [
+                    "Documents"
+                ],
+                "summary": "Get Document",
+                "description": "Get the document. The content will be the binary PDF/DOCX content, or be UTF-8-encoded content if it is text.\n\nA `404 Not Found` status code will be returned, if the provided request parameters do not exist.\n\nNote that if `/documents/update-document` returns a new document id, then all urls will be invalidated and must be retrieved again.\n\nThe HTTP cache policy on this endpoint is set to never expire, unlike other endpoints whose HTTP headers assert no-cache.",
+                "operationId": "get_document_documents_get_document_get",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "The document token",
+                            "title": "Token"
+                        },
+                        "description": "The document token"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-hidden": true
+            }
+        },
+        "/documents/get-page-image": {
+            "get": {
+                "tags": [
+                    "Documents"
+                ],
+                "summary": "Get Page Image",
+                "description": "Get the image for a specific page. The image will be returned as a JPEG.\n\nThis endpoint is meant to be used with `<img>` tags in the frontend. A `404 Not Found` status code will be returned, if the provided request parameters do not exist or if the page exists but does not have an associated image.\n\nNote that if `/documents/update-document` returns a new document id, then all urls will be invalidated and must be retrieved again.\n\nThe HTTP cache policy on this endpoint is set to never expire, unlike other endpoints whose HTTP headers assert no-cache.",
+                "operationId": "get_page_image_documents_get_page_image_get",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "The image token",
+                            "title": "Token"
+                        },
+                        "description": "The image token"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-hidden": true
+            }
+        },
+        "/queries/top-documents": {
+            "post": {
+                "tags": [
+                    "Queries"
+                ],
+                "summary": "Top Documents",
+                "description": "Get the top K documents that match the given query",
+                "operationId": "top_documents_queries_top_documents_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TopDocumentsRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TopDocumentsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/queries/top-pages": {
+            "post": {
+                "tags": [
+                    "Queries"
+                ],
+                "summary": "Top Pages",
+                "description": "Get the top K pages that match the given query",
+                "operationId": "top_pages_queries_top_pages_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TopPagesRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TopPagesResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        },
+        "/queries/top-snippets": {
+            "post": {
+                "tags": [
+                    "Queries"
+                ],
+                "summary": "Top Snippets",
+                "description": "Get the top K snippets that match the given query.\n\nYou may choose between coarse and precise snippets. Precise snippets will average ~200 characters, while coarse snippets will average ~2000 characters. The default is coarse snippets. Use the `precise_responses` parameter to adjust.",
+                "operationId": "top_snippets_queries_top_snippets_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TopSnippetsRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TopSnippetsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "detail": "Description of Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "APIBinaryDocument": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "auto"
+                        ],
+                        "const": "auto",
+                        "title": "Type",
+                        "description": "When this is set to `auto`, then the file extension and binary data will be used to deduce a filetype automatically. Currently, only `auto` is supported."
+                    },
+                    "base64_data": {
+                        "type": "string",
+                        "title": "Base64 Data",
+                        "description": "The file's raw data, as a base64-encoded string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "base64_data"
+                ],
+                "title": "APIBinaryDocument"
+            },
+            "APIKeyInfo": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id",
+                        "description": "The API key ID"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At",
+                        "description": "When the API key was created"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "description": "The name of the API key"
+                    },
+                    "permission": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/DBAPIKeyPermission"
+                            }
+                        ],
+                        "description": "The permission level"
+                    },
+                    "created_by": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created By",
+                        "description": "Who created this API key"
+                    },
+                    "api_key": {
+                        "type": "string",
+                        "title": "Api Key",
+                        "description": "The API key itself"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "created_at",
+                    "name",
+                    "permission",
+                    "created_by",
+                    "api_key"
+                ],
+                "title": "APIKeyInfo"
+            },
+            "APITextDocument": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "text"
+                        ],
+                        "const": "text",
+                        "title": "Type",
+                        "description": "This field must be `text`"
+                    },
+                    "text": {
+                        "type": "string",
+                        "title": "Text",
+                        "description": "The content of this document, as a text string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "text"
+                ],
+                "title": "APITextDocument"
+            },
+            "APITextPagesDocument": {
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "text-pages",
+                            "text-pages-unordered"
+                        ],
+                        "title": "Type",
+                        "description": "This field must be `text-pages` or `text-pages-unordered`. When `unordered` is provided, it is assumed that consecutive pages aren't meant to be read one after another. For example, PDFs are ordered, and CSVs are unordered."
+                    },
+                    "pages": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Pages",
+                        "description": "The content of this document, as an array of strings. Each string will be the content of a full page, and can be retrieved using the Top Pages endpoint. Pages are 0-indexed, so that the first string has index 0, the second string has index 1."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "type",
+                    "pages"
+                ],
+                "title": "APITextPagesDocument"
+            },
+            "AddAPIKeyRequest": {
+                "properties": {
+                    "organization_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Organization Id",
+                        "description": "The organization ID to create the API key for."
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name",
+                        "description": "A descriptive name for this API key."
+                    },
+                    "permission": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/DBAPIKeyPermission"
+                            }
+                        ],
+                        "description": "The permission level for this API key."
+                    },
+                    "created_by": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Created By",
+                        "description": "Who created this API key."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "organization_id",
+                    "name",
+                    "permission"
+                ],
+                "title": "AddAPIKeyRequest"
+            },
+            "AddAPIKeyResponse": {
+                "properties": {
+                    "api_key": {
+                        "type": "string",
+                        "title": "Api Key",
+                        "description": "The generated API key."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "api_key"
+                ],
+                "title": "AddAPIKeyResponse"
+            },
+            "AddCollectionRequest": {
+                "properties": {
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name",
+                        "description": "The name of the collection to add. The maximum length of this string is 1024 characters. If special characters are used, then the UTF-8 encoded string cannot exceed 1024 bytes."
+                    },
+                    "num_shards": {
+                        "type": "integer",
+                        "title": "Num Shards",
+                        "description": "[ADVANCED] The number of shards to use for this collection. By using K shards, your documents can index with K times more throughput. However, queries will be automatically sent to all K shards and then aggregated. For large collections, this can make queries faster. But for small collections, this will make queries slower. `num_shards` must be one of [1, 8, 16, 32, 64]. The default is 1.",
+                        "default": 1
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_name"
+                ],
+                "title": "AddCollectionRequest"
+            },
+            "AddDocumentRequest": {
+                "properties": {
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name",
+                        "description": "The name of the collection to be used for this request. A `404 Not Found` status code will be returned if this collection name does not exist."
+                    },
+                    "path": {
+                        "type": "string",
+                        "title": "Path",
+                        "description": "The filepath of the document that you are adding. A `409 Conflict` status code will be returned if this path already exists, unless `overwrite` is set to `true`."
+                    },
+                    "content": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/APITextDocument"
+                            },
+                            {
+                                "$ref": "#/components/schemas/APITextPagesDocument"
+                            },
+                            {
+                                "$ref": "#/components/schemas/APIBinaryDocument"
+                            }
+                        ],
+                        "title": "Content",
+                        "description": "The content of the document. There are three possible JSON types that can be passed into this parameter: `APITextDocument`, `APITextPagesDocument`, `APIBinaryDocument`. The `type` field is how ZeroEntropy will know which document object you have passed in.",
+                        "discriminator": {
+                            "propertyName": "type",
+                            "mapping": {
+                                "auto": "#/components/schemas/APIBinaryDocument",
+                                "text": "#/components/schemas/APITextDocument",
+                                "text-pages": "#/components/schemas/APITextPagesDocument",
+                                "text-pages-unordered": "#/components/schemas/APITextPagesDocument"
+                            }
+                        }
+                    },
+                    "metadata": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/DocumentMetadataJson"
+                            }
+                        ],
+                        "description": "This is a metadata JSON object that can be used to assign various metadata attributes to your document. The provided object must match the type `dict[str, str | list[str]]`. Please read [Metadata Filtering](/metadata-filtering) for more details. By default, the metadata will be set to `{}`.\n\nNOTE: The UTF-8-encoded JSON string must be less than 65536 bytes (Whitespace does not count). This limit can be increased upon request.",
+                        "default": {}
+                    },
+                    "overwrite": {
+                        "type": "boolean",
+                        "title": "Overwrite",
+                        "description": "Setting this property to true will put this endpoint in \"upsert\" mode: If the document already exists, this action will atomically replace it.",
+                        "default": false
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_name",
+                    "path",
+                    "content"
+                ],
+                "title": "AddDocumentRequest"
+            },
+            "AggregationWindow": {
+                "type": "string",
+                "enum": [
+                    "minutely",
+                    "hourly",
+                    "daily"
+                ],
+                "title": "AggregationWindow"
+            },
+            "CreateOrganizationRequest": {
+                "properties": {
+                    "organization_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Organization Id",
+                        "description": "The organization id to create. Must be unique."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "organization_id"
+                ],
+                "title": "CreateOrganizationRequest"
+            },
+            "DBAPIKeyPermission": {
+                "type": "string",
+                "enum": [
+                    "all",
+                    "read_only"
+                ],
+                "title": "DBAPIKeyPermission"
+            },
+            "DefaultResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "title": "Message",
+                        "description": "This string will always be \"Success!\". This may change in the future.",
+                        "default": "Success!"
+                    }
+                },
+                "type": "object",
+                "title": "DefaultResponse"
+            },
+            "DeleteAPIKeyRequest": {
+                "properties": {
+                    "organization_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Organization Id",
+                        "description": "The organization ID of the related api key."
+                    },
+                    "api_key_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Api Key Id",
+                        "description": "The API key ID to delete."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "organization_id",
+                    "api_key_id"
+                ],
+                "title": "DeleteAPIKeyRequest"
+            },
+            "DeleteCollectionRequest": {
+                "properties": {
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name",
+                        "description": "The name of the collection to delete."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_name"
+                ],
+                "title": "DeleteCollectionRequest"
+            },
+            "DeleteDocumentRequest": {
+                "properties": {
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name",
+                        "description": "The name of the collection."
+                    },
+                    "path": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            }
+                        ],
+                        "title": "Path",
+                        "description": "The path(s) of the document(s) that you are deleting. Must be either a `string`, or a `list[str]` between 1 and 64 inclusive. A `404 Not Found` status code will be returned if no document(s) with this path was found. If at least one of the paths provided do exist, then `200 OK` will be returned, along with an array of the document paths that were found and thus deleted."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_name",
+                    "path"
+                ],
+                "title": "DeleteDocumentRequest"
+            },
+            "DeleteDocumentResponse": {
+                "properties": {
+                    "deleted_paths": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Deleted Paths"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "deleted_paths"
+                ],
+                "title": "DeleteDocumentResponse"
+            },
+            "DocumentEventEnum": {
+                "type": "string",
+                "enum": [
+                    "added",
+                    "deleted",
+                    "parsed",
+                    "indexed"
+                ],
+                "title": "DocumentEventEnum"
+            },
+            "DocumentIndexStatus": {
+                "type": "string",
+                "enum": [
+                    "not_parsed",
+                    "parsing",
+                    "not_indexed",
+                    "indexing",
+                    "indexed",
+                    "parsing_failed",
+                    "indexing_failed"
+                ],
+                "title": "DocumentIndexStatus"
+            },
+            "DocumentMetadataJson": {
+                "additionalProperties": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    ]
+                },
+                "type": "object"
+            },
+            "DocumentMetadataResponse": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id"
+                    },
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name"
+                    },
+                    "path": {
+                        "type": "string",
+                        "title": "Path"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/DocumentMetadataJson"
+                    },
+                    "index_status": {
+                        "$ref": "#/components/schemas/DocumentIndexStatus"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "title": "Size",
+                        "description": "The total size of the raw document data, in bytes."
+                    },
+                    "num_pages": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Num Pages",
+                        "description": "The number of pages in this document. This will be `null` if the document is parsing or failed to parse. It can also be `null` if the document is a filetype that does not support pages."
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "title": "File Url",
+                        "description": "A URL to the document data, which can be used to download the raw document content or to display the document in frontend applications.\n\nNOTE: If a `/documents/update-document` call returned a new document id, then this url will be invalidated and must be retrieved again."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "collection_name",
+                    "path",
+                    "metadata",
+                    "index_status",
+                    "created_at",
+                    "size",
+                    "num_pages",
+                    "file_url"
+                ],
+                "title": "DocumentMetadataResponse"
+            },
+            "DocumentResponse": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id"
+                    },
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name"
+                    },
+                    "path": {
+                        "type": "string",
+                        "title": "Path"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/DocumentMetadataJson"
+                    },
+                    "index_status": {
+                        "$ref": "#/components/schemas/DocumentIndexStatus"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "title": "Size",
+                        "description": "The total size of the raw document data, in bytes."
+                    },
+                    "num_pages": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Num Pages",
+                        "description": "The number of pages in this document. This will be `null` if the document is parsing or failed to parse. It can also be `null` if the document is a filetype that does not support pages."
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "title": "File Url",
+                        "description": "A URL to the document data, which can be used to download the raw document content or to display the document in frontend applications.\n\nNOTE: If a `/documents/update-document` call returned a new document id, then this url will be invalidated and must be retrieved again."
+                    },
+                    "content": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Content",
+                        "description": "This will be `null`, unless `include_content` was available and set to `true`."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "collection_name",
+                    "path",
+                    "metadata",
+                    "index_status",
+                    "size",
+                    "num_pages",
+                    "file_url"
+                ],
+                "title": "DocumentResponse"
+            },
+            "DocumentRetrievalResponse": {
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "title": "Path",
+                        "description": "The path of the document."
+                    },
+                    "score": {
+                        "type": "number",
+                        "title": "Score",
+                        "description": "The relevancy score assigned to this document."
+                    },
+                    "metadata": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/DocumentMetadataJson"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "The metadata for that document. Will be `None` if `include_metadata` is `False`."
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "title": "File Url",
+                        "description": "A URL to the document data, which can be used to download the raw document content or to display the document in frontend applications.\n\nNOTE: If a `/documents/update-document` call returned a new document id, then this url will be invalidated and must be retrieved again."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "path",
+                    "score",
+                    "metadata",
+                    "file_url"
+                ],
+                "title": "DocumentRetrievalResponse"
+            },
+            "DocumentUsageResponse": {
+                "properties": {
+                    "window_start": {
+                        "type": "integer",
+                        "title": "Window Start"
+                    },
+                    "organization_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Organization Id"
+                    },
+                    "collection_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Collection Id"
+                    },
+                    "event_type": {
+                        "$ref": "#/components/schemas/DocumentEventEnum"
+                    },
+                    "event_count": {
+                        "type": "integer",
+                        "title": "Event Count"
+                    },
+                    "total_file_size_bytes": {
+                        "type": "integer",
+                        "title": "Total File Size Bytes"
+                    },
+                    "total_content_tokens": {
+                        "type": "integer",
+                        "title": "Total Content Tokens"
+                    },
+                    "total_llm_tokens": {
+                        "type": "integer",
+                        "title": "Total Llm Tokens"
+                    },
+                    "total_embedding_tokens": {
+                        "type": "integer",
+                        "title": "Total Embedding Tokens"
+                    },
+                    "total_coarse_chunks": {
+                        "type": "integer",
+                        "title": "Total Coarse Chunks"
+                    },
+                    "total_fine_chunks": {
+                        "type": "integer",
+                        "title": "Total Fine Chunks"
+                    },
+                    "total_pages": {
+                        "type": "integer",
+                        "title": "Total Pages"
+                    },
+                    "total_time_taken_ms": {
+                        "type": "number",
+                        "title": "Total Time Taken Ms"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "window_start",
+                    "organization_id",
+                    "collection_id",
+                    "event_type",
+                    "event_count",
+                    "total_file_size_bytes",
+                    "total_content_tokens",
+                    "total_llm_tokens",
+                    "total_embedding_tokens",
+                    "total_coarse_chunks",
+                    "total_fine_chunks",
+                    "total_pages",
+                    "total_time_taken_ms"
+                ],
+                "title": "DocumentUsageResponse"
+            },
+            "EmbedRequest": {
+                "properties": {
+                    "model": {
+                        "type": "string",
+                        "title": "Model",
+                        "description": "The model ID to use for embedding. Options are: [\"zembed-1\"]"
+                    },
+                    "input_type": {
+                        "type": "string",
+                        "enum": [
+                            "query",
+                            "document"
+                        ],
+                        "title": "Input Type",
+                        "description": "The input type. For retrieval tasks, either `query` or `document`."
+                    },
+                    "input": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            }
+                        ],
+                        "title": "Input",
+                        "description": "The string, or list of strings, to embed."
+                    },
+                    "dimensions": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Dimensions",
+                        "description": "The output dimensionality of the embedding model. For `zembed-1`, the available options are: [2560, 1280, 640, 320, 160, 80, 40]."
+                    },
+                    "encoding_format": {
+                        "type": "string",
+                        "enum": [
+                            "float",
+                            "base64"
+                        ],
+                        "title": "Encoding Format",
+                        "description": "The output format of the embedding. If `float`, an array of floats will be returned for each embeddings. If `base64`, a f32 little endian byte array will be returned, encoded as a base64 string. `base64` is significantly more efficient than `float`. The default is `float`.",
+                        "default": "float"
+                    },
+                    "latency": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "enum": [
+                                    "fast",
+                                    "slow"
+                                ]
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Latency",
+                        "description": "Whether the call will be inferenced \"fast\" or \"slow\". RateLimits for slow API calls are orders of magnitude higher, but you can expect 2-20 second latency. Fast inferences are guaranteed subsecond, but rate limits are lower. If not specified, first a \"fast\" call will be attempted, but if you have exceeded your fast rate limit, then a slow call will be executed. If explicitly set to \"fast\", then 429 will be returned if it cannot be executed fast."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "model",
+                    "input_type",
+                    "input"
+                ],
+                "title": "EmbedRequest"
+            },
+            "EmbedResponse": {
+                "properties": {
+                    "results": {
+                        "items": {
+                            "$ref": "#/components/schemas/EmbedResult"
+                        },
+                        "type": "array",
+                        "title": "Results",
+                        "description": "The list of embedding results."
+                    },
+                    "usage": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/EmbedUsage"
+                            }
+                        ],
+                        "description": "Statistics regarding the tokens used by the request."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "results",
+                    "usage"
+                ],
+                "title": "EmbedResponse"
+            },
+            "EmbedResult": {
+                "properties": {
+                    "embedding": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "number"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "title": "Embedding",
+                        "description": "The embedding of the input text, as an array of floats. If `base64` format is requested, the response will be an fp32 little endian byte array, encoded as a base64 string."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "embedding"
+                ],
+                "title": "EmbedResult"
+            },
+            "EmbedUsage": {
+                "properties": {
+                    "total_bytes": {
+                        "type": "integer",
+                        "title": "Total Bytes",
+                        "description": "The total number of bytes in the request. This is used for ratelimiting."
+                    },
+                    "total_tokens": {
+                        "type": "integer",
+                        "title": "Total Tokens",
+                        "description": "The total number of tokens in the request. This is used for billing."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "total_bytes",
+                    "total_tokens"
+                ],
+                "title": "EmbedUsage"
+            },
+            "EmptyRequest": {
+                "x-stainless-empty-object": "true",
+                "properties": {},
+                "type": "object",
+                "title": "EmptyRequest"
+            },
+            "GetCollectionListResponse": {
+                "properties": {
+                    "collection_names": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Collection Names",
+                        "description": "The names of the matched collections."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_names"
+                ],
+                "title": "GetCollectionListResponse"
+            },
+            "GetDocumentInfoListRequest": {
+                "properties": {
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name",
+                        "description": "The name of the collection."
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "title": "Limit",
+                        "description": "The maximum number of documents to return. This field is by default 1024, and cannot be set larger than 1024",
+                        "default": 1024
+                    },
+                    "path_prefix": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Path Prefix",
+                        "description": "All documents returned will have a path that starts with the provided path prefix."
+                    },
+                    "path_gt": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Path Gt",
+                        "description": "All documents returned will have a path strictly greater than the provided `path_gt` argument. (Comparison will be based on lexicographic comparison. It is guaranteed that two strings are lexicographically equal if and only if they have identical binary representations.)."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_name"
+                ],
+                "title": "GetDocumentInfoListRequest"
+            },
+            "GetDocumentInfoListResponse": {
+                "properties": {
+                    "documents": {
+                        "items": {
+                            "$ref": "#/components/schemas/DocumentMetadataResponse"
+                        },
+                        "type": "array",
+                        "title": "Documents"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "documents"
+                ],
+                "title": "GetDocumentInfoListResponse"
+            },
+            "GetDocumentInfoRequest": {
+                "properties": {
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name",
+                        "description": "The name of the collection."
+                    },
+                    "path": {
+                        "type": "string",
+                        "title": "Path",
+                        "description": "The filepath of the document that you're requesting. A `404 Not Found` status code will be returned if no document with this path was found."
+                    },
+                    "include_content": {
+                        "type": "boolean",
+                        "title": "Include Content",
+                        "description": "If `true`, then the document response will have the `content` attribute be a `string`, rather than `null`. This string will contain the full contents of the document.",
+                        "default": false
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_name",
+                    "path"
+                ],
+                "title": "GetDocumentInfoRequest"
+            },
+            "GetDocumentInfoResponse": {
+                "properties": {
+                    "document": {
+                        "$ref": "#/components/schemas/DocumentResponse"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "document"
+                ],
+                "title": "GetDocumentInfoResponse"
+            },
+            "GetPageInfoRequest": {
+                "properties": {
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name",
+                        "description": "The name of the collection."
+                    },
+                    "path": {
+                        "type": "string",
+                        "title": "Path",
+                        "description": "The filepath of the document whose page you are requesting. A `404 Not Found` status code will be returned if no document with this path was found."
+                    },
+                    "page_index": {
+                        "type": "integer",
+                        "title": "Page Index",
+                        "description": "The specific page index whose info is being requested. Pages are 0-indexed, so that the 1st page of a PDF is of page index 0. You may use the `num_pages` attribute of `/documents/get-document-info` or `/documents/get-document-info-list` to know what the range of valid indices are. A `404 Not Found` status code will be returned if no such page index exists. "
+                    },
+                    "include_content": {
+                        "type": "boolean",
+                        "title": "Include Content",
+                        "description": "If `true`, then the response will have the `content` attribute be a `string`, rather than `null`. This string will contain the full contents of the page.",
+                        "default": false
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_name",
+                    "path",
+                    "page_index"
+                ],
+                "title": "GetPageInfoRequest"
+            },
+            "GetPageInfoResponse": {
+                "properties": {
+                    "page": {
+                        "$ref": "#/components/schemas/PageResponse"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "page"
+                ],
+                "title": "GetPageInfoResponse"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "ListAPIKeysRequest": {
+                "properties": {
+                    "organization_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Organization Id",
+                        "description": "The organization ID to list API keys for."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "organization_id"
+                ],
+                "title": "ListAPIKeysRequest"
+            },
+            "ListAPIKeysResponse": {
+                "properties": {
+                    "api_keys": {
+                        "items": {
+                            "$ref": "#/components/schemas/APIKeyInfo"
+                        },
+                        "type": "array",
+                        "title": "Api Keys",
+                        "description": "The list of API keys associated with this organization."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "api_keys"
+                ],
+                "title": "ListAPIKeysResponse"
+            },
+            "ModelsUsageCountersResponse": {
+                "properties": {
+                    "all_time": {
+                        "$ref": "#/components/schemas/ModelsUsageStats"
+                    },
+                    "billing_cycle": {
+                        "$ref": "#/components/schemas/ModelsUsageStats"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "all_time",
+                    "billing_cycle"
+                ],
+                "title": "ModelsUsageCountersResponse"
+            },
+            "ModelsUsageStats": {
+                "properties": {
+                    "rerank": {
+                        "$ref": "#/components/schemas/UsageMetric"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "rerank"
+                ],
+                "title": "ModelsUsageStats"
+            },
+            "PageResponse": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id"
+                    },
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name",
+                        "description": "The name of the collection."
+                    },
+                    "path": {
+                        "type": "string",
+                        "title": "Path",
+                        "description": "The filepath of the document associated with this page."
+                    },
+                    "page_index": {
+                        "type": "integer",
+                        "title": "Page Index",
+                        "description": "The specific page index of this page. Pages are 0-indexed, so that the 1st page of a PDF is of page index 0."
+                    },
+                    "content": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Content",
+                        "description": "The content of the page. This field will only be provided if `include_content` was set to `true`, and the document has finished parsing. Otherwise, this field will be set to `null`."
+                    },
+                    "image_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Image Url",
+                        "description": "A URL to an image of the page. This field will only be provided if the document has finished parsing, and if it is a filetype that is capable of producing images (e.g. PDF, DOCX, PPT, etc). In all other cases, this field will be `null`.\n\nNOTE: If a `/documents/update-document` call returned a new document id, then this url will be invalidated and must be retrieved again."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "collection_name",
+                    "path",
+                    "page_index",
+                    "image_url"
+                ],
+                "title": "PageResponse"
+            },
+            "PageRetrievalResponse": {
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "title": "Path",
+                        "description": "The path of the document that this page comes from."
+                    },
+                    "page_index": {
+                        "type": "integer",
+                        "title": "Page Index",
+                        "description": "The index of this page in the document. This field is 0-indexed. So, the 1st page has index 0, and the 2nd page has index 1."
+                    },
+                    "score": {
+                        "type": "number",
+                        "title": "Score",
+                        "description": "The relevancy score assigned to this page."
+                    },
+                    "content": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Content",
+                        "description": "The contents of this page. This property will be null when `include_content` is `false`, and a string when `include_content` is `true`."
+                    },
+                    "image_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Image Url",
+                        "description": "A URL to an image of the page. This field will only be provided if the document has finished parsing, and if it is a filetype that is capable of producing images (e.g. PDF, DOCX, PPT, etc). In all other cases, this field will be `null`.\n\nNOTE: If a `/documents/update-document` call returned a new document id, then this url will be invalidated and must be retrieved again."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "path",
+                    "page_index",
+                    "score",
+                    "content",
+                    "image_url"
+                ],
+                "title": "PageRetrievalResponse",
+                "description": "A Page's metadata."
+            },
+            "QueryEnum": {
+                "type": "string",
+                "enum": [
+                    "fine",
+                    "coarse",
+                    "pages",
+                    "documents"
+                ],
+                "title": "QueryEnum"
+            },
+            "QueryUsageResponse": {
+                "properties": {
+                    "window_start": {
+                        "type": "integer",
+                        "title": "Window Start"
+                    },
+                    "organization_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Organization Id"
+                    },
+                    "collection_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Collection Id"
+                    },
+                    "query_type": {
+                        "$ref": "#/components/schemas/QueryEnum"
+                    },
+                    "event_count": {
+                        "type": "integer",
+                        "title": "Event Count"
+                    },
+                    "total_query_bytes": {
+                        "type": "integer",
+                        "title": "Total Query Bytes"
+                    },
+                    "total_queried_bytes": {
+                        "type": "integer",
+                        "title": "Total Queried Bytes"
+                    },
+                    "total_query_tokens": {
+                        "type": "integer",
+                        "title": "Total Query Tokens"
+                    },
+                    "total_results_returned": {
+                        "type": "integer",
+                        "title": "Total Results Returned"
+                    },
+                    "total_time_taken_ms": {
+                        "type": "number",
+                        "title": "Total Time Taken Ms"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "window_start",
+                    "organization_id",
+                    "collection_id",
+                    "query_type",
+                    "event_count",
+                    "total_query_bytes",
+                    "total_queried_bytes",
+                    "total_query_tokens",
+                    "total_results_returned",
+                    "total_time_taken_ms"
+                ],
+                "title": "QueryUsageResponse"
+            },
+            "RerankRequest": {
+                "properties": {
+                    "model": {
+                        "type": "string",
+                        "title": "Model",
+                        "description": "The model ID to use for reranking. Options are: [\"zerank-2\", \"zerank-1\", \"zerank-1-small\"]"
+                    },
+                    "query": {
+                        "type": "string",
+                        "title": "Query",
+                        "description": "The query to rerank the documents by."
+                    },
+                    "top_n": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Top N",
+                        "description": "If provided, then only the top `n` documents will be returned in the results array. Otherwise, `n` will be the length of the provided documents array."
+                    },
+                    "documents": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Documents",
+                        "description": "The list of documents to rerank. Each document is a string."
+                    },
+                    "latency": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "enum": [
+                                    "fast",
+                                    "slow"
+                                ]
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Latency",
+                        "description": "Whether the call will be inferenced \"fast\" or \"slow\". RateLimits for slow API calls are orders of magnitude higher, but you can expect >10 second latency. Fast inferences are guaranteed subsecond, but rate limits are lower. If not specified, first a \"fast\" call will be attempted, but if you have exceeded your fast rate limit, then a slow call will be executed. If explicitly set to \"fast\", then 429 will be returned if it cannot be executed fast."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "model",
+                    "query",
+                    "documents"
+                ],
+                "title": "RerankRequest"
+            },
+            "RerankResponse": {
+                "properties": {
+                    "results": {
+                        "items": {
+                            "$ref": "#/components/schemas/RerankResult"
+                        },
+                        "type": "array",
+                        "title": "Results",
+                        "description": "The results, ordered by descending order of relevance to the query."
+                    },
+                    "total_bytes": {
+                        "type": "integer",
+                        "title": "Total Bytes",
+                        "description": "The total number of bytes in the request. This is used for ratelimiting."
+                    },
+                    "total_tokens": {
+                        "type": "integer",
+                        "title": "Total Tokens",
+                        "description": "The total number of tokens in the request. This is used for billing."
+                    },
+                    "actual_latency_mode": {
+                        "type": "string",
+                        "enum": [
+                            "fast",
+                            "slow"
+                        ],
+                        "title": "Actual Latency Mode",
+                        "description": "The type of inference actually used. If `auto` is requested, then `fast` will be used by default, with `slow` as a fallback if your ratelimit is exceeded. Else, this field will be identical to the requested latency mode."
+                    },
+                    "e2e_latency": {
+                        "type": "number",
+                        "title": "E2E Latency",
+                        "description": "The total time, in seconds, between rerank request received and rerank response returned. Client latency should equal `e2e_latency` + your ping to ZeroEntropy's API."
+                    },
+                    "inference_latency": {
+                        "type": "number",
+                        "title": "Inference Latency",
+                        "description": "The time, in seconds, to actually inference the request. If this is significantly lower than `e2e_latency`, this is likely due to ratelimiting. Please request a higher ratelimit at [founders@zeroentropy.dev](mailto:founders@zeroentropy.dev) or message us on [Discord](https://go.zeroentropy.dev/discord) or [Slack](https://go.zeroentropy.dev/slack)!"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "results",
+                    "total_bytes",
+                    "total_tokens",
+                    "actual_latency_mode",
+                    "e2e_latency",
+                    "inference_latency"
+                ],
+                "title": "RerankResponse"
+            },
+            "RerankResult": {
+                "properties": {
+                    "index": {
+                        "type": "integer",
+                        "title": "Index",
+                        "description": "The index of this document, relative to the original document array passed into the request."
+                    },
+                    "relevance_score": {
+                        "type": "number",
+                        "title": "Relevance Score",
+                        "description": "The relevance score between this document and the query. This number will range between 0.0 and 1.0. This score is dependent on only the query and the scored document; other documents do not affect this score. This value is intended to be deterministic, but it may vary slightly due to floating point error."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "index",
+                    "relevance_score"
+                ],
+                "title": "RerankResult"
+            },
+            "RerankUsageResponse": {
+                "properties": {
+                    "window_start": {
+                        "type": "integer",
+                        "title": "Window Start"
+                    },
+                    "organization_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Organization Id"
+                    },
+                    "reranker_model": {
+                        "type": "string",
+                        "title": "Reranker Model"
+                    },
+                    "explicit_call": {
+                        "type": "boolean",
+                        "title": "Explicit Call"
+                    },
+                    "event_count": {
+                        "type": "integer",
+                        "title": "Event Count"
+                    },
+                    "total_request_bytes": {
+                        "type": "integer",
+                        "title": "Total Request Bytes"
+                    },
+                    "total_reranker_tokens": {
+                        "type": "integer",
+                        "title": "Total Reranker Tokens"
+                    },
+                    "total_documents_reranked": {
+                        "type": "integer",
+                        "title": "Total Documents Reranked"
+                    },
+                    "total_time_taken_ms": {
+                        "type": "number",
+                        "title": "Total Time Taken Ms"
+                    },
+                    "total_reranking_time_ms": {
+                        "type": "number",
+                        "title": "Total Reranking Time Ms"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "window_start",
+                    "organization_id",
+                    "reranker_model",
+                    "explicit_call",
+                    "event_count",
+                    "total_request_bytes",
+                    "total_reranker_tokens",
+                    "total_documents_reranked",
+                    "total_time_taken_ms",
+                    "total_reranking_time_ms"
+                ],
+                "title": "RerankUsageResponse"
+            },
+            "SnippetResponse": {
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "title": "Path",
+                        "description": "The path of the document that this snippet comes from."
+                    },
+                    "start_index": {
+                        "type": "integer",
+                        "title": "Start Index",
+                        "description": "The start index of this snippet."
+                    },
+                    "end_index": {
+                        "type": "integer",
+                        "title": "End Index",
+                        "description": "The end index of this snippet."
+                    },
+                    "page_span": {
+                        "prefixItems": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "integer"
+                            }
+                        ],
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "title": "Page Span",
+                        "description": "The range of page indices spanned by this snippet, as a 2-tuple of integers. Inclusive on the first page_index and exclusive on the second page_index."
+                    },
+                    "content": {
+                        "type": "string",
+                        "title": "Content",
+                        "description": "The full string content of this snippet."
+                    },
+                    "score": {
+                        "type": "number",
+                        "title": "Score",
+                        "description": "The relevancy score assigned to this snippet."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "path",
+                    "start_index",
+                    "end_index",
+                    "page_span",
+                    "content",
+                    "score"
+                ],
+                "title": "SnippetResponse",
+                "description": "This is a Snippet.\n\nA snippet refers to a particular document path, and index range. Note that all documents, regardless of filetype, are converted into `UTF-8`-encoded strings. The `start_index` and `end_index` refer to the range of characters in that string, that have been matched by this snippet."
+            },
+            "StatusRequest": {
+                "properties": {
+                    "collection_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Collection Name",
+                        "description": "The collection name to use. If `collection_name` is `null` or omitted, then the cumulative status across all collections will be shown."
+                    }
+                },
+                "type": "object",
+                "title": "StatusRequest"
+            },
+            "StatusResponse": {
+                "properties": {
+                    "num_documents": {
+                        "type": "integer",
+                        "title": "Num Documents",
+                        "description": "The total number of documents, regardless of their status. It is guaranteed that the sum of all of the other fields, is this number."
+                    },
+                    "num_parsing_documents": {
+                        "type": "integer",
+                        "title": "Num Parsing Documents",
+                        "description": "The number of documents that are being parsed. This refers files of the type PDF, DOCX, PPT, etc, whose images are being processed, or are waiting to be processed, by our OCR system."
+                    },
+                    "num_indexing_documents": {
+                        "type": "integer",
+                        "title": "Num Indexing Documents",
+                        "description": "The number of documents being indexed. Indexing occurs only after the document has finished parsing."
+                    },
+                    "num_indexed_documents": {
+                        "type": "integer",
+                        "title": "Num Indexed Documents",
+                        "description": "The number of documents that are currently indexed."
+                    },
+                    "num_failed_documents": {
+                        "type": "integer",
+                        "title": "Num Failed Documents",
+                        "description": "The number of failed documents. Failures can occur during either parsing, or indexing. It can occur if the file is malformed or incomplete. If you believe that the file is formatted correctly, please contact us at `founders@zeroentropy.dev` to assist."
+                    },
+                    "num_indexed_bytes": {
+                        "type": "integer",
+                        "title": "Num Indexed Bytes",
+                        "description": "The total number of bytes used by documents that are currently indexed. Measured as UTF-8 bytes. For PDF/DOCX/PPT/etc, this is of the OCR'ed text."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "num_documents",
+                    "num_parsing_documents",
+                    "num_indexing_documents",
+                    "num_indexed_documents",
+                    "num_failed_documents",
+                    "num_indexed_bytes"
+                ],
+                "title": "StatusResponse"
+            },
+            "StrJson": {
+                "type": "object",
+                "additionalProperties": true
+            },
+            "TopDocumentsRequest": {
+                "properties": {
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name",
+                        "description": "The name of the collection."
+                    },
+                    "query": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Query",
+                        "description": "The natural language query to search with. This cannot exceed 4096 UTF-8 bytes. If `null`, then the sort will be undefined. The purpose of `null` is to do faster metadata filter searches without care for relevancy. Cost per query is unchanged."
+                    },
+                    "k": {
+                        "type": "integer",
+                        "title": "K",
+                        "description": "The number of documents to return. If there are not enough documents matching your filters, then fewer may be returned. This number must be between 1 and 2048, inclusive."
+                    },
+                    "filter": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/StrJson"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "The query filter to apply. Please read [Metadata Filtering](/metadata-filtering) for more information. If not provided, then all documents will be searched."
+                    },
+                    "include_metadata": {
+                        "type": "boolean",
+                        "title": "Include Metadata",
+                        "description": "Whether or not to include the metadata in the top documents response. If not provided, then the default will be `False`.",
+                        "default": false
+                    },
+                    "reranker": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Reranker",
+                        "description": "The reranker to use after initial retrieval. The default is `null`. You can find available model ids along with more information at [/models/rerank](/api-reference/models/rerank)."
+                    },
+                    "latency_mode": {
+                        "type": "string",
+                        "enum": [
+                            "low",
+                            "high"
+                        ],
+                        "title": "Latency Mode",
+                        "description": "This option selects between our two latency modes. The higher latency mode takes longer, but can allow for more accurate responses. If desired, test both to customize your search experience for your particular use-case, or use the default of \"low\" and only swap if you need an additional improvement in search result quality.",
+                        "default": "low"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_name",
+                    "query",
+                    "k"
+                ],
+                "title": "TopDocumentsRequest"
+            },
+            "TopDocumentsResponse": {
+                "properties": {
+                    "results": {
+                        "items": {
+                            "$ref": "#/components/schemas/DocumentRetrievalResponse"
+                        },
+                        "type": "array",
+                        "title": "Results"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "results"
+                ],
+                "title": "TopDocumentsResponse"
+            },
+            "TopPagesRequest": {
+                "properties": {
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name",
+                        "description": "The name of the collection."
+                    },
+                    "query": {
+                        "type": "string",
+                        "title": "Query",
+                        "description": "The natural language query to search with. This cannot exceed 4096 UTF-8 bytes."
+                    },
+                    "k": {
+                        "type": "integer",
+                        "title": "K",
+                        "description": "The number of pages to return. If there are not enough pages matching your filters, then fewer may be returned. This number must be between 1 and 1024, inclusive."
+                    },
+                    "filter": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/StrJson"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "The query filter to apply. Please read [Metadata Filtering](/metadata-filtering) for more information. If not provided, then all documents will be searched."
+                    },
+                    "include_content": {
+                        "type": "boolean",
+                        "title": "Include Content",
+                        "description": "If set to true, then the content of all pages will be returned.",
+                        "default": false
+                    },
+                    "include_metadata": {
+                        "type": "boolean",
+                        "title": "Include Metadata",
+                        "description": "Whether or not to include the document metadata in the response. If not provided, then the default will be `False`.",
+                        "default": false
+                    },
+                    "latency_mode": {
+                        "type": "string",
+                        "enum": [
+                            "low",
+                            "high"
+                        ],
+                        "title": "Latency Mode",
+                        "description": "This option selects between our two latency modes. The higher latency mode takes longer, but can allow for more accurate responses. If desired, test both to customize your search experience for your particular use-case, or use the default of \"low\" and only swap if you need an additional improvement in search result quality.",
+                        "default": "low"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_name",
+                    "query",
+                    "k"
+                ],
+                "title": "TopPagesRequest"
+            },
+            "TopPagesResponse": {
+                "properties": {
+                    "results": {
+                        "items": {
+                            "$ref": "#/components/schemas/PageRetrievalResponse"
+                        },
+                        "type": "array",
+                        "title": "Results"
+                    },
+                    "document_results": {
+                        "items": {
+                            "$ref": "#/components/schemas/DocumentRetrievalResponse"
+                        },
+                        "type": "array",
+                        "title": "Document Results",
+                        "description": "The array of associated document information. Note how each result page has an associated document path. After deduplicating the document paths, this array will contain document info for each document path that is referenced by at least one page result."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "results",
+                    "document_results"
+                ],
+                "title": "TopPagesResponse"
+            },
+            "TopSnippetsRequest": {
+                "properties": {
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name",
+                        "description": "The name of the collection."
+                    },
+                    "query": {
+                        "type": "string",
+                        "title": "Query",
+                        "description": "The natural language query to search with. This cannot exceed 4096 characters (A single UTF-8 codepoint, is considered to be 1 character)."
+                    },
+                    "k": {
+                        "type": "integer",
+                        "title": "K",
+                        "description": "The number of snippets to return. If there are not enough snippets matching your filters, then fewer may be returned. This number must be between 1 and 128, inclusive."
+                    },
+                    "reranker": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Reranker",
+                        "description": "The reranker to use after initial retrieval. The default is `null`. You can find available model ids, along with more information, at [/models/rerank](/api-reference/models/rerank)."
+                    },
+                    "filter": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/StrJson"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "The query filter to apply. Please read [Metadata Filtering](/metadata-filtering) for more information. If not provided, then all documents will be searched."
+                    },
+                    "precise_responses": {
+                        "type": "boolean",
+                        "title": "Precise Responses",
+                        "description": "Enable precise responses. Precise responses will have higher latency, but provide much more precise snippets. When `precise_responses` is set to `true`, the responses will average 200 characters. If set to `false`, the responses will average 2000 characters. The default is `false`.",
+                        "default": false
+                    },
+                    "include_document_metadata": {
+                        "type": "boolean",
+                        "title": "Include Document Metadata",
+                        "description": "If true, the `document_results` returns will additionally contain document metadata. This is false by default, as returning metadata can add overhead if the amount of data to return is large.",
+                        "default": false
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_name",
+                    "query",
+                    "k"
+                ],
+                "title": "TopSnippetsRequest"
+            },
+            "TopSnippetsResponse": {
+                "properties": {
+                    "results": {
+                        "items": {
+                            "$ref": "#/components/schemas/SnippetResponse"
+                        },
+                        "type": "array",
+                        "title": "Results",
+                        "description": "The array of snippets returned by this endpoint. Each snippet result refers to a particular document path, and index range. Note that all documents, regardless of filetype, are converted into `UTF-8`-encoded strings. The `start_index` and `end_index` of a snippet refer to the range of characters in that string, that have been matched by this snippet."
+                    },
+                    "document_results": {
+                        "items": {
+                            "$ref": "#/components/schemas/DocumentRetrievalResponse"
+                        },
+                        "type": "array",
+                        "title": "Document Results",
+                        "description": "The array of associated document information. Note how each snippet has an associated document path. After deduplicating the document paths, this array will contain document info for each document path that is referenced by at least one snippet result."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "results",
+                    "document_results"
+                ],
+                "title": "TopSnippetsResponse"
+            },
+            "UpdateAPIKeyRequest": {
+                "properties": {
+                    "organization_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Organization Id",
+                        "description": "The organization ID of the related api key."
+                    },
+                    "api_key_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Api Key Id",
+                        "description": "The API key ID to update."
+                    },
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name",
+                        "description": "New name for the API key."
+                    },
+                    "permission": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/DBAPIKeyPermission"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "New permission level for the API key."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "organization_id",
+                    "api_key_id"
+                ],
+                "title": "UpdateAPIKeyRequest"
+            },
+            "UpdateDocumentRequest": {
+                "properties": {
+                    "collection_name": {
+                        "type": "string",
+                        "title": "Collection Name",
+                        "description": "The name of the collection."
+                    },
+                    "path": {
+                        "type": "string",
+                        "title": "Path",
+                        "description": "The filepath of the document that you are updating. A `404 Not Found` status code will be returned if no document with this path was found."
+                    },
+                    "metadata": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/DocumentMetadataJson"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "If this field is provided, the given metadata json will replace the document's existing metadata json. In other words, if you want to add a new field, you will need to provide the entire metadata object (Both the original fields, and the new field)."
+                    },
+                    "index_status": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "enum": [
+                                    "not_parsed",
+                                    "not_indexed"
+                                ]
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Index Status",
+                        "description": "If the document is in the index_status of `parsing_failed or `indexing_failed`, then this endpoint allows you to update the index status to `not_parsed` and `not_indexed`, respectively. This allows the document to re-attempt to parse/index after failure."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "collection_name",
+                    "path"
+                ],
+                "title": "UpdateDocumentRequest"
+            },
+            "UsageCountersResponse": {
+                "properties": {
+                    "all_time": {
+                        "$ref": "#/components/schemas/UsageStats"
+                    },
+                    "billing_cycle": {
+                        "$ref": "#/components/schemas/UsageStats"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "all_time",
+                    "billing_cycle"
+                ],
+                "title": "UsageCountersResponse"
+            },
+            "UsageMetric": {
+                "properties": {
+                    "count": {
+                        "type": "integer",
+                        "title": "Count"
+                    },
+                    "bytes": {
+                        "type": "integer",
+                        "title": "Bytes"
+                    },
+                    "billable_units": {
+                        "type": "integer",
+                        "title": "Billable Units"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "count",
+                    "bytes",
+                    "billable_units"
+                ],
+                "title": "UsageMetric"
+            },
+            "UsageRequest": {
+                "properties": {
+                    "start_time": {
+                        "type": "integer",
+                        "title": "Start Time",
+                        "description": "Start time for the usage query (inclusive) - Unix timestamp (seconds since epoch)"
+                    },
+                    "end_time": {
+                        "type": "integer",
+                        "title": "End Time",
+                        "description": "End time for the usage query (inclusive) - Unix timestamp (seconds since epoch)"
+                    },
+                    "aggregation_window": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AggregationWindow"
+                            }
+                        ],
+                        "description": "Aggregation granularity: minutely, hourly, or daily"
+                    },
+                    "collection_names": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Collection Names",
+                        "description": "Optional list of collection names to filter by. If None, returns data for all collections."
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "start_time",
+                    "end_time",
+                    "aggregation_window"
+                ],
+                "title": "UsageRequest"
+            },
+            "UsageStats": {
+                "properties": {
+                    "docs": {
+                        "$ref": "#/components/schemas/UsageMetric"
+                    },
+                    "ocr": {
+                        "$ref": "#/components/schemas/UsageMetric"
+                    },
+                    "indexed": {
+                        "$ref": "#/components/schemas/UsageMetric"
+                    },
+                    "queries": {
+                        "$ref": "#/components/schemas/UsageMetric"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "docs",
+                    "ocr",
+                    "indexed",
+                    "queries"
+                ],
+                "title": "UsageStats"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        },
+        "securitySchemes": {
+            "HTTPBearer": {
+                "type": "http",
+                "description": "The `Authorization` header must be provided in the format `Bearer <your-api-key>`.\n\nYou can get your API Key at the [Dashboard](https://dashboard.zeroentropy.dev/)!",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
