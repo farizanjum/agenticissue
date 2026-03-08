@@ -1,6 +1,4 @@
 {
-  "version": 2,
-  "framework": "nextjs",
   "buildCommand": "cd next-issue-search && npm run build",
   "installCommand": "cd next-issue-search && npm install",
   "outputDirectory": "next-issue-search/.next"
