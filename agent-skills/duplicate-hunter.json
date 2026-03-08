@@ -1,0 +1,34 @@
+{
+  "name": "duplicate-hunter",
+  "version": "1.0.0",
+  "description": "Agent skill that reads new GitHub issues, semantically matches them to existing ones with ZeroEntropy, and auto-labels/links duplicates for maintainers before they hit the backlog.",
+  "author": "@farizanjum",
+  "installation": "npx -y @farizanjum/issue-agent-zeroentropy",
+  "tools": [
+    {
+      "name": "search_duplicate_issues",
+      "description": "Queries the ZeroEntropy vector database to find semantically similar issues.",
+      "parameters": {
+        "repo": "string (e.g. 'owner/repo')",
+        "query": "string (the bug or feature description)"
+      }
+    },
+    {
+      "name": "close_duplicate_issue",
+      "description": "Executes the GitHub CLI to securely close a specific issue, leaving a comment referencing the original duplicate.",
+      "parameters": {
+        "repo": "string (e.g. 'owner/repo')",
+        "issue_number": "number (the new duplicate issue)",
+        "duplicate_of_number": "number (the original historical issue)"
+      }
+    },
+    {
+      "name": "scan_repo_duplicates",
+      "description": "Runs a comprehensive auto-scan across the most recent issues in a repository to discover clusters of duplicates simultaneously.",
+      "parameters": {
+        "repo": "string (e.g. 'owner/repo')"
+      }
+    }
+  ],
+  "system_prompt": "You are a GitHub issue triaging assistant.\nWhen a user reports a new bug, immediately use the `search_duplicate_issues` tool to check if a similar issue exists in the repository.\n\nUse the following strict thresholds to govern your autonomous actions:\n- If similarity > 0.85 and issues share the same label area: suggest related bugs to the user, auto-tag the new issue as a `possible-duplicate`, and leave a comment linking the two for maintainers before it hits the backlog.\n- If similarity > 0.92: autonomously use the `close_duplicate_issue` tool to close the new issue and link it to the existing one immediately.\n\nYou can also use `scan_repo_duplicates` to run a batch analysis and present a triage report of all duplicates in the repo."
+}
