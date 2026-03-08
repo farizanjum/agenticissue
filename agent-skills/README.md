@@ -41,3 +41,17 @@ Bake this instruction into your agent's context window:
 > - If similarity > 0.92: autonomously use the `close_duplicate_issue` tool to close the new issue and link it to the existing one immediately.
 > 
 > You can also use `scan_repo_duplicates` to run a batch analysis and present a triage report of all duplicates in the repo.
+
+## Deployment to Vercel
+
+Since this repository is a monorepo containing both the `next-issue-search` web app and the `agent-package` MCP server, here is how to deploy it to Vercel:
+
+1. Import this repository into your Vercel Dashboard.
+2. In the "Configure Project" step, open the **Framework Preset** dropdown and select **Next.js**.
+3. **CRITICAL:** Open the **Root Directory** setting and select `next-issue-search`.
+4. Open the **Environment Variables** section and add:
+   - `GITHUB_TOKEN` = `your_github_personal_access_token`
+   - `ZERO_ENTROPY_KEY` = `your_zero_entropy_api_key`
+5. Click **Deploy**.
+
+*A `vercel.json` file is also included in the root to help Vercel automatically configure the build commands if you don't set the root directory.*
