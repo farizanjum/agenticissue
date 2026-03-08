@@ -1,6 +1,3 @@
 {
-  "buildCommand": "cd next-issue-search && npm run build",
-  "installCommand": "cd next-issue-search && npm install",
-  "outputDirectory": "next-issue-search/.next",
-  "framework": "nextjs"
+  "$schema": "https://openapi.vercel.sh/vercel.json"
 }
