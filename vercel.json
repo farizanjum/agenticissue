@@ -1,7 +1,6 @@
 {
-  "rootDirectory": "next-issue-search",
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "outputDirectory": ".next",
+  "buildCommand": "cd next-issue-search && npm run build",
+  "installCommand": "cd next-issue-search && npm install",
+  "outputDirectory": "next-issue-search/.next",
   "framework": "nextjs"
 }
